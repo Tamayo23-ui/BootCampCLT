@@ -1,0 +1,40 @@
+Esto lee el Dockerfile y genera una imagen. 
+docker build -t bootcampclt-api:1.1 .
+
+Esto levanta la aplicación a partir de la imagen.
+docker run --rm -p 5000:8080 -e ASPNETCORE_ENVIRONMENT=Development -e ASPNETCORE_URLS=http://+:8080 -e ConnectionStrings__ProductosDb="Host=host.docker.internal;Port=5432;Database=hardwareCLT;Username=postgres;Password=a.123456" bootcampclt-api:1.1
+
+Cómo comprobar que la imagen existe
+docker images
+
+Cómo comprobar que el contenedor está corriendo Mientras el docker run está activo:
+docker ps
+
+
+Si tenés Swagger habilitad http://localhost:5000/swagger
+
+
+Tomá este archivo YAML y creá o actualizá los recursos que describe
+kubectl apply -f deployment.yml
+Kubernetes creó un Deployment
+
+
+El archivo service.yml define un Service que Apunta a los Pods del Deployment
+kubectl apply -f service.yml
+
+Detecta el NodePort Abre un túnel desde Windows hacia Minikube Devuelve una URL accesible desde tu máquina
+minikube service bootcampclt-api-svc --url
+
+http://127.0.0.1:62989/swagger
+El Pod funciona
+
+Desde kubectl kubectl logs bootcampclt-api-668bb78ff7-4plw4
+
+
+Qué hiciste con kubectl exec (muy importante)
+kubectl exec -it postgres-55b4877fd5-d9z7p -- psql -U postgres -d hardwareCLT
+
+Entraste dentro del contenedor de PostgreSQL, Abriste una consola psql,
+Conectada a la base hardwareCLT, Usuario postgres
+
+Estás ejecutando SQL dentro del Postgres que usa Kubernetes, no en tu PC.
