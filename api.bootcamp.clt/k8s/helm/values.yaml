@@ -1,14 +1,14 @@
 ﻿replicaCount: 2
  
 image:
-  repository: kiaratorales/bootcampclt-api
+  repository: josetamayo/bootcampclt-api
   tag: "1.1"
   pullPolicy: IfNotPresent
 app:
   containerPort: 8080
   env:
     aspnetcoreEnvironment: Development
-    applicationName: API-BOOTCAMP-KIARA
+    applicationName: API-BOOTCAMP-TAMAYO
 
  
 service:
