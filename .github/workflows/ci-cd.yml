@@ -50,6 +50,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy with Helm to Minikube
+
         run: |
           helm upgrade --install bootcamp-api . --set image.tag=${{ needs.ci.outputs.image_tag }}
           kubectl rollout status deployment/bootcamp-api --timeout=120s
